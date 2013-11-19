@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<TLV>
+  <type term="PortInfo">
+    <type term="PortUser">
+      <value>variable</value>
+    </type>
+    <type term="PortSwitch">
+      <value>variable</value>
+    </type>
+    <type term="SMI">
+      <value>variable</value>
+    </type>
+    <type term="AddrPHY">
+      <value>variable</value>
+    </type>
+    <type term="AddrSwitch">
+      <value>variable</value>
+    </type>
+    <type term="PortSpeed">
+      <value>Fast Fiber</value>
+      <value>Fast Copper</value>
+      <value>Gig Fiber</value>
+      <value>Gig Copper</value>
+      <value>10Gig Fiber</value>
+      <value>10Gig Copper</value>
+    </type>
+    <type term="PortCombo">
+      <value>Combo</value>
+      <value>Non Combo</value>
+    </type>
+    <type term="OpticTransiever">
+      <value>None</value>
+      <value>SFP</value>
+      <value>SFP+</value>
+      <value>SFF</value>
+    </type>
+    <type term="TypePHY">
+      <value>88E3083</value>
+      <value>88E1322</value>
+      <value>88E1340</value>
+      <value>98X20251</value>
+    </type>
+    <type term="PortPOE">
+      <value>NonPOE</value>
+      <value>POE</value>
+      <value>POE+</value>
+    </type>
+    <type term="PortStack">
+      <value>Non Stack</value>
+      <value>Primary</value>
+      <value>Secondary</value>
+    </type>
+    <type term="SwitchCascade">
+      <value>variable</value>
+    </type>
+    <type term="InterruptPin">
+      <value>variable</value>
+    </type>
+    <type term="TypeI2C">
+      <value>variable</value>
+    </type>
+    <type term="I2CAddrStream">
+      <value>variable</value>
+    </type>
+  </type>
+  <type term="ChipSwitch">
+    <value>98DX2122</value>
+    <value>98DX4122</value>
+  </type>
+  <type term="POEInfo">
+    <type term="POEBudget">
+      <value>variable</value>
+    </type>
+    <type term="POEChip">
+      <value>PD69100 (Microsemi)</value>
+      <value>Si3482 (Silabs)</value>
+    </type>
+    <type term="ChipInterface">
+      <value>UART</value>
+      <value>I2C</value>
+      <value>SPI</value>
+    </type>
+    <type term="ChipPOEAddrI2C">
+      <value>variable</value>
+    </type>
+  </type>
+  <type term="DyingGasp">
+    <value>variable</value>
+  </type>
+  <type term="MacAddr">
+    <value>variable</value>
+  </type>
+  <type term="SerialNumber">
+    <value>variable</value>
+  </type>
+  <type term="Name">
+    <value>variable</value>
+  </type>
+  <type term="SoftwareSet">
+    <value>variable</value>
+  </type>
+</TLV>
