@@ -178,7 +178,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
 
     }
 
-    else if (getTLVType() == 0x02) {  // Chip Switch      +
+    else if (getTLVType() == 0x02) {  // Chip Switch             +
         QComboBox *editor = new QComboBox(treewidg);
         editor->addItems(ChipSwitch);
         return editor;

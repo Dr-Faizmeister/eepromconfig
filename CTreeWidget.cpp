@@ -76,12 +76,12 @@ void CTreeWidget::editorClosed(QWidget *editor)
 
          for (int i = 0; i < list.length(); ++i) // цикл проверки на повторение значений поля ТИП
          {
-             CTreeWidgetItem* trwi=dynamic_cast<CTreeWidgetItem*>(list[i]);
+             CTreeWidgetItem* treeWidgetItem=dynamic_cast<CTreeWidgetItem*>(list[i]);
              //у записей совпадают родители
-             if (trwi->parent() == tItem->parent())
+             if (treeWidgetItem->parent() == tItem->parent())
              {
                  //в дереве нашлась запись совпадающая с только что введенным типом
-                 if (trwi->getTLVType() == teditor->currentIndex()+1)
+                 if (treeWidgetItem->getTLVType() == teditor->currentIndex()+1)
                  {
                      teditor->setCurrentIndex(tItem->getTLVType());
                      tItem->setText(0,"");
@@ -146,8 +146,12 @@ void CTreeWidget::editorClosed(QWidget *editor)
                         tItem->setRecordData (tItem->getTLVType(),teditor->text());
                 }
                 }
-        }
-        else //записи верхнего уровня
+        } else if (tItem->getTLVType() == 0x02) { // Chip Switch             +
+            QComboBox* teditor = dynamic_cast<QComboBox*>(editor);
+
+            if (tItem->getTLVValue().toInt() != teditor->currentIndex())
+                tItem->setRecordData(tItem->getTLVType(), QString("%1").arg(teditor->currentIndex()));
+        } else // другие записи верхнего уровня
         {
             QLineEdit* teditor = dynamic_cast<QLineEdit*>(editor);
 
