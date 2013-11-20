@@ -13,7 +13,7 @@
 
 class CTreeWidget;
 
-class CTreeWidgetItem: public QTreeWidgetItem
+class CTreeWidgetItem: public QTreeWidgetItem, DomParser
 {
 public:
     CTreeWidgetItem (CTreeWidget* widg, CTreeWidgetItem* par = NULL);
@@ -34,7 +34,7 @@ private:
     quint8 TLVtype;
     QString TLVvalue;
     CTreeWidgetItem* cparent;
-    CTreeWidget* treewidg;
+    CTreeWidget* treeWidget;
 };
 
 #endif // CTREEWIDGETITEM_H

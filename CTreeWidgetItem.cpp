@@ -4,7 +4,7 @@ CTreeWidgetItem::CTreeWidgetItem(CTreeWidget *widg, CTreeWidgetItem* par):
     QTreeWidgetItem(0)
 {
     cparent = par;
-    treewidg = widg;
+    treeWidget = widg;
     TLVtype = 0;
     setFlags(flags() | Qt::ItemIsEditable);
 }
@@ -129,7 +129,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
 {
     if (cparent)
     {
-        QComboBox *editor = new QComboBox(treewidg);
+        QComboBox *editor = new QComboBox(treeWidget);
         if (cparent->getTLVType() == 0x01) //Port Info
         {
             switch (TLVtype)
@@ -168,7 +168,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
             }
         }
 
-        QLineEdit *teditor = new QLineEdit(treewidg);
+        QLineEdit *teditor = new QLineEdit(treeWidget);
 
         QRegExp hex_in("[0-9A-Fa-f]{1,2}");
         QValidator *validator = new QRegExpValidator(hex_in);
@@ -179,14 +179,14 @@ QWidget* CTreeWidgetItem::createValueEditor()
     }
 
     else if (getTLVType() == 0x02) {  // Chip Switch             +
-        QComboBox *editor = new QComboBox(treewidg);
+        QComboBox *editor = new QComboBox(treeWidget);
         editor->addItems(ChipSwitch);
         return editor;
     }
 
     else
     {
-        QLineEdit *editor = new QLineEdit(treewidg);
+        QLineEdit *editor = new QLineEdit(treeWidget);
         switch (TLVtype)
         {
         case 0x05: //MACAddr

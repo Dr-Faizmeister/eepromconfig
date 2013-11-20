@@ -12,7 +12,7 @@
 
 class CTreeWidgetItem;
 
-struct CTreeItemDelegate : public QItemDelegate
+struct CTreeItemDelegate : public QItemDelegate, DomParser
 {
     Q_OBJECT
 public:
@@ -22,7 +22,7 @@ public:
 
 };
 
-class CTreeWidget: public QTreeWidget
+class CTreeWidget: public QTreeWidget, DomParser
 {
     Q_OBJECT
 public:

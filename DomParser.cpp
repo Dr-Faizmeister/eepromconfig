@@ -21,15 +21,15 @@ bool DomParser::readFile(const QString &fileName) {
 void DomParser::parseTLVElement(const QDomElement &element) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
-        if (child.toElement().tagName() == "type") {
-            QString term = element.attribute("term");
-            TLVFirstLevel << term;
-            if (term == "PortInfo") {
-                parsePortInfoElement(child.toElement());
-            } else if (term == "ChipSwitch") {
-                parseChipSwitchElement(child.toElement());
-            } else if (term == "POEInfo") {
-                parsePOEInfoElement(child.toElement());
+        QDomElement el = child.toElement();
+        if (el.tagName() == "type") {
+            TLVFirstLevel << el.attribute("term");
+            if (el.attribute("term") == "PortInfo") {
+                parsePortInfoElement(el);
+            } else if (el.attribute("term") == "ChipSwitch") {
+                parseChipSwitchElement(el);
+            } else if (el.attribute("term") == "POEInfo") {
+                parsePOEInfoElement(el);
             }
         }
         child = child.nextSibling();
@@ -39,20 +39,21 @@ void DomParser::parseTLVElement(const QDomElement &element) {
 void DomParser::parsePortInfoElement(const QDomElement &element) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
-        if (child.toElement().tagName() == "type") {
-            PortInfo << element.attribute("term");
-            if (element.attribute("term") == "PortSpeed") {
-                parsePortSpeedElement(child.toElement());
-            } else if (element.attribute("term") == "PortCombo") {
-                parsePortComboElement(child.toElement());
-            } else if (element.attribute("term") == "OpticTransiever") {
-                parseOpticTransieverElement(child.toElement());
-            } else if (element.attribute("term") == "TypePHY") {
-                parseTypePHYElement(child.toElement());
-            } else if (element.attribute("term") == "PortPOE") {
-                parsePortPOEElement(child.toElement());
-            } else if (element.attribute("term") == "PortStack") {
-                parsePortStackElement(child.toElement());
+        QDomElement el = child.toElement();
+        if (el.tagName() == "type") {
+            PortInfo << el.attribute("term");
+            if (el.attribute("term") == "PortSpeed") {
+                parsePortSpeedElement(el);
+            } else if (el.attribute("term") == "PortCombo") {
+                parsePortComboElement(el);
+            } else if (el.attribute("term") == "OpticTransiever") {
+                parseOpticTransieverElement(el);
+            } else if (el.attribute("term") == "TypePHY") {
+                parseTypePHYElement(el);
+            } else if (el.attribute("term") == "PortPOE") {
+                parsePortPOEElement(el);
+            } else if (el.attribute("term") == "PortStack") {
+                parsePortStackElement(el);
             }
         }
         child = child.nextSibling();
@@ -73,12 +74,13 @@ void DomParser::parseChipSwitchElement(const QDomElement &element) {
 void DomParser::parsePOEInfoElement(const QDomElement &element) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
-        if (child.toElement().tagName() == "type") {
-            POEInfo << element.attribute("term");
-            if (element.attribute("term") == "POEChip") {
-                parsePOEChipElement(child.toElement());
-            } else if (element.attribute("term") == "ChipInterface") {
-                parseChipInterfaceElement(child.toElement());
+        QDomElement el = child.toElement();
+        if (el.tagName() == "type") {
+            POEInfo << el.attribute("term");
+            if (el.attribute("term") == "POEChip") {
+                parsePOEChipElement(el);
+            } else if (el.attribute("term") == "ChipInterface") {
+                parseChipInterfaceElement(el);
             }
         }
         child = child.nextSibling();
