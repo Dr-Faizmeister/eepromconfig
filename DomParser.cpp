@@ -13,163 +13,118 @@ bool DomParser::readFile(const QString &fileName) {
     if (root.tagName() != "TLV") {
         return false;
     }
-    parseTLVElement(root);
+    parseTLVElement(root, TLVFirstLevel);
     file.close(); // нужно ли вообще его закрывать??
     return true;
 }
 
-void DomParser::parseTLVElement(const QDomElement &element) {
+void DomParser::parseTLVElement(const QDomElement &element, QStringList &TLVFirstLevel) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
         QDomElement el = child.toElement();
         if (el.tagName() == "type") {
             TLVFirstLevel << el.attribute("term");
             if (el.attribute("term") == "PortInfo") {
-                parsePortInfoElement(el);
+                parsePortInfoElement(el, PortInfo);
             } else if (el.attribute("term") == "ChipSwitch") {
-                parseChipSwitchElement(el);
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        ChipSwitch << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             } else if (el.attribute("term") == "POEInfo") {
-                parsePOEInfoElement(el);
+                parsePOEInfoElement(el, POEInfo);
             }
         }
         child = child.nextSibling();
     }
 }
 
-void DomParser::parsePortInfoElement(const QDomElement &element) {
+void DomParser::parsePortInfoElement(const QDomElement &element, QStringList &PortInfo) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
         QDomElement el = child.toElement();
         if (el.tagName() == "type") {
             PortInfo << el.attribute("term");
             if (el.attribute("term") == "PortSpeed") {
-                parsePortSpeedElement(el);
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        PortSpeed << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             } else if (el.attribute("term") == "PortCombo") {
-                parsePortComboElement(el);
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        PortCombo << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             } else if (el.attribute("term") == "OpticTransiever") {
-                parseOpticTransieverElement(el);
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        OpticTransiever << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             } else if (el.attribute("term") == "TypePHY") {
-                parseTypePHYElement(el);
+                QDomNode child = el.firstChild();
+                while(!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        TypePHY << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             } else if (el.attribute("term") == "PortPOE") {
-                parsePortPOEElement(el);
+                QDomNode child = el.firstChild();
+                while(!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        PortPOE << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             } else if (el.attribute("term") == "PortStack") {
-                parsePortStackElement(el);
+                QDomNode child = el.firstChild();
+                while(!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        PortStack << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             }
         }
         child = child.nextSibling();
     }
 }
 
-void DomParser::parseChipSwitchElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while (!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            ChipSwitch << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parsePOEInfoElement(const QDomElement &element) {
+void DomParser::parsePOEInfoElement(const QDomElement &element, QStringList &POEInfo) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
         QDomElement el = child.toElement();
         if (el.tagName() == "type") {
             POEInfo << el.attribute("term");
             if (el.attribute("term") == "POEChip") {
-                parsePOEChipElement(el);
+                QDomNode child = el.firstChild();
+                while(!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        POEChip << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             } else if (el.attribute("term") == "ChipInterface") {
-                parseChipInterfaceElement(el);
+                QDomNode child = el.firstChild();
+                while(!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                       ChipInterface << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
             }
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parsePortSpeedElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while (!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            PortSpeed << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parsePortComboElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while (!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            PortCombo << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parseOpticTransieverElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while (!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            OpticTransiever << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parseTypePHYElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while(!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            TypePHY << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parsePortPOEElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while(!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            PortPOE << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parsePortStackElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while(!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            PortStack << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parsePOEChipElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while(!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            POEChip << value;
-        }
-        child = child.nextSibling();
-    }
-}
-
-void DomParser::parseChipInterfaceElement(const QDomElement &element) {
-    QDomNode child = element.firstChild();
-    while(!child.isNull()) {
-        if (child.toElement().tagName() == "value") {
-            QString value = element.text();
-            ChipInterface << value;
         }
         child = child.nextSibling();
     }

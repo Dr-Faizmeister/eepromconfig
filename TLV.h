@@ -33,5 +33,17 @@
 
 //static QStringList ChipInterface = QStringList() << "UART" << "I2C" << "SPI";
 
+    QStringList TLVFirstLevel;
+    QStringList PortInfo;
+    QStringList POEInfo;
+    QStringList PortSpeed;
+    QStringList PortCombo;
+    QStringList OpticTransiever;
+    QStringList TypePHY;
+    QStringList PortPOE;
+    QStringList PortStack;
+    QStringList ChipSwitch;
+    QStringList POEChip;
+    QStringList ChipInterface;
 
 #endif // TLV_H

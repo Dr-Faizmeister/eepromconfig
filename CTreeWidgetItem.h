@@ -13,7 +13,7 @@
 
 class CTreeWidget;
 
-class CTreeWidgetItem: public QTreeWidgetItem, DomParser
+class CTreeWidgetItem: public QTreeWidgetItem
 {
 public:
     CTreeWidgetItem (CTreeWidget* widg, CTreeWidgetItem* par = NULL);
