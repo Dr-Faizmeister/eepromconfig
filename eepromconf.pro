@@ -23,8 +23,7 @@ HEADERS  += mainwindow.h \
     CFirstAreaTable.h \
     CTreeWidgetItem.h \
     CTreeWidget.h \
-    DomParser.h \
-    TLV.h
+    DomParser.h
 
 FORMS    += mainwindow.ui
 CONFIG += staticlib

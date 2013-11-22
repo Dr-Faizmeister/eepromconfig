@@ -6,13 +6,12 @@
 #include <QItemDelegate>
 #include <QLineEdit>
 #include <QComboBox>
-#include "TLV.h"
 #include "CTreeWidgetItem.h"
 #include "DomParser.h"
 
 class CTreeWidgetItem;
 
-struct CTreeItemDelegate : public QItemDelegate
+struct CTreeItemDelegate : public QItemDelegate, DomParser
 {
     Q_OBJECT
 public:
@@ -22,7 +21,7 @@ public:
 
 };
 
-class CTreeWidget: public QTreeWidget
+class CTreeWidget: public QTreeWidget, DomParser
 {
     Q_OBJECT
 public:

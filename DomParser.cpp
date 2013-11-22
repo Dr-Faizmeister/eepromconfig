@@ -13,19 +13,19 @@ bool DomParser::readFile(const QString &fileName) {
     if (root.tagName() != "TLV") {
         return false;
     }
-    parseTLVElement(root, TLVFirstLevel);
+    parseTLVElement(root);
     file.close(); // нужно ли вообще его закрывать??
     return true;
 }
 
-void DomParser::parseTLVElement(const QDomElement &element, QStringList &TLVFirstLevel) {
+void DomParser::parseTLVElement(const QDomElement &element) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
         QDomElement el = child.toElement();
         if (el.tagName() == "type") {
             TLVFirstLevel << el.attribute("term");
             if (el.attribute("term") == "PortInfo") {
-                parsePortInfoElement(el, PortInfo);
+                parsePortInfoElement(el);
             } else if (el.attribute("term") == "ChipSwitch") {
                 QDomNode child = el.firstChild();
                 while (!child.isNull()) {
@@ -35,14 +35,14 @@ void DomParser::parseTLVElement(const QDomElement &element, QStringList &TLVFirs
                     child = child.nextSibling();
                 }
             } else if (el.attribute("term") == "POEInfo") {
-                parsePOEInfoElement(el, POEInfo);
+                parsePOEInfoElement(el);
             }
         }
         child = child.nextSibling();
     }
 }
 
-void DomParser::parsePortInfoElement(const QDomElement &element, QStringList &PortInfo) {
+void DomParser::parsePortInfoElement(const QDomElement &element) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
         QDomElement el = child.toElement();
@@ -102,7 +102,7 @@ void DomParser::parsePortInfoElement(const QDomElement &element, QStringList &Po
     }
 }
 
-void DomParser::parsePOEInfoElement(const QDomElement &element, QStringList &POEInfo) {
+void DomParser::parsePOEInfoElement(const QDomElement &element) {
     QDomNode child = element.firstChild();
     while (!child.isNull()) {
         QDomElement el = child.toElement();

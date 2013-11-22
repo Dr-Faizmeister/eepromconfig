@@ -7,13 +7,12 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QtEndian>
-#include "TLV.h"
 #include "CTreeWidget.h"
 #include "DomParser.h"
 
 class CTreeWidget;
 
-class CTreeWidgetItem: public QTreeWidgetItem
+class CTreeWidgetItem: public QTreeWidgetItem, DomParser
 {
 public:
     CTreeWidgetItem (CTreeWidget* widg, CTreeWidgetItem* par = NULL);

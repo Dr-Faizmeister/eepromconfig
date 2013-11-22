@@ -174,7 +174,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
         QValidator *validator = new QRegExpValidator(hex_in);
 
         teditor->setValidator(validator);
-         return teditor;
+        return teditor;
 
     }
 
