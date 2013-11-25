@@ -8,9 +8,6 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    DomParser parser;
-    parser.readFile("C:/Qt/proj/eeprom/eepromconf/config.xml");
-
     printf ("parser done\n");
 
     MainWindow w;

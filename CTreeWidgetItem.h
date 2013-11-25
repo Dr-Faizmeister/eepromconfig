@@ -8,11 +8,12 @@
 #include <QComboBox>
 #include <QtEndian>
 #include "CTreeWidget.h"
-#include "DomParser.h"
+#include <QFile>
+#include "qdom.h"
 
 class CTreeWidget;
 
-class CTreeWidgetItem: public QTreeWidgetItem, DomParser
+class CTreeWidgetItem: public QTreeWidgetItem
 {
 public:
     CTreeWidgetItem (CTreeWidget* widg, CTreeWidgetItem* par = NULL);

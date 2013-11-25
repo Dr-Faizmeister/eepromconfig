@@ -9,6 +9,49 @@ QWidget* CTreeItemDelegate::createEditor ( QWidget * parent,
                                          const QStyleOptionViewItem & option,
                                          const QModelIndex & index ) const
 {
+    QStringList TLVFirstLevel;
+    QStringList PortInfo;
+    QStringList POEInfo;
+
+    QFile file("C:/Qt/proj/eeprom/eepromconf/config.xml");
+    file.open(QFile::ReadOnly | QFile::Text);
+    QDomDocument config;
+    if (!config.setContent(&file, false)) {
+        return false;
+    }
+    QDomElement root = config.documentElement();
+    if (root.tagName() != "TLV") {
+        return false;
+    }
+    QDomNode child = root.firstChild();
+    while (!child.isNull()) {
+        QDomElement el = child.toElement();
+        if (el.tagName() == "type") {
+            TLVFirstLevel << el.attribute("term");
+            if (el.attribute("term") == "PortInfo") {
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    QDomElement el = child.toElement();
+                    if (el.tagName() == "type") {
+                        PortInfo << el.attribute("term");
+                    }
+                    child = child.nextSibling();
+                }
+            } else if (el.attribute("term") == "POEInfo") {
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    QDomElement el = child.toElement();
+                    if (el.tagName() == "type") {
+                        POEInfo << el.attribute("term");
+                    }
+                    child = child.nextSibling();
+                }
+            }
+        }
+        child = child.nextSibling();
+    }
+    file.close(); // нужно ли вообще его закрывать??
+
     CTreeWidget* treeWidget = dynamic_cast<CTreeWidget*> (this->parent());
     CTreeWidgetItem* treeWidgetItem = treeWidget->currentItem();
 

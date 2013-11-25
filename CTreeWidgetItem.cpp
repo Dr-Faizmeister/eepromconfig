@@ -127,6 +127,122 @@ void CTreeWidgetItem::setRecordData(quint8 tlvtype, QString tlvvalue)
 //============================================================================================
 QWidget* CTreeWidgetItem::createValueEditor()
 {
+    QStringList PortSpeed;
+    QStringList PortCombo;
+    QStringList OpticTransiever;
+    QStringList TypePHY;
+    QStringList PortPOE;
+    QStringList PortStack;
+    QStringList ChipSwitch;
+    QStringList POEChip;
+    QStringList ChipInterface;
+
+    QFile file("C:/Qt/proj/eeprom/eepromconf/config.xml");
+    file.open(QFile::ReadOnly | QFile::Text);
+    QDomDocument config;
+    if (!config.setContent(&file, false)) {
+        return false;
+    }
+    QDomElement root = config.documentElement();
+    if (root.tagName() != "TLV") {
+        return false;
+    }
+    QDomNode child = root.firstChild();
+    while (!child.isNull()) {
+        QDomElement el = child.toElement();
+        if (el.tagName() == "type") {
+            if (el.attribute("term") == "PortInfo") {
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    QDomElement element = child.toElement();
+                    if (element.tagName() == "type" && element.attribute("term") == "PortSpeed") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                PortSpeed << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    } else if (element.tagName() == "type" && element.attribute("term") == "PortCombo") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                PortCombo << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    } else if (element.tagName() == "type" && element.attribute("term") == "OpticTransiever") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                OpticTransiever << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    } else if (element.tagName() == "type" && element.attribute("term") == "TypePHY") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                TypePHY << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    } else if (element.tagName() == "type" && element.attribute("term") == "PortPOE") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                PortPOE << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    } else if (element.tagName() == "type" && element.attribute("term") == "PortStack") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                PortStack << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    }
+                    child = child.nextSibling();
+                }
+            } else if (el.attribute("term") == "POEInfo") {
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    QDomElement element = child.toElement();
+                    if (element.tagName() == "type" && element.attribute("term") == "POEChip") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                POEChip << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    } else if (element.tagName() == "type" && element.attribute("term") == "ChipInterface") {
+                        QDomNode child = element.firstChild();
+                        while (!child.isNull()) {
+                            if (child.toElement().tagName() == "value") {
+                                ChipInterface << child.toElement().text();
+                            }
+                            child = child.nextSibling();
+                        }
+                    }
+                    child = child.nextSibling();
+                }
+            } else if (el.attribute("term") == "ChipSwitch") {
+                QDomNode child = el.firstChild();
+                while (!child.isNull()) {
+                    if (child.toElement().tagName() == "value") {
+                        ChipSwitch << child.toElement().text();
+                    }
+                    child = child.nextSibling();
+                }
+            }
+        }
+        child = child.nextSibling();
+    }
+    file.close(); // нужно ли вообще его закрывать??
+
     if (cparent)
     {
         QComboBox *editor = new QComboBox(treeWidget);

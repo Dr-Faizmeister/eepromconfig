@@ -16,14 +16,12 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     CFirstAreaTable.cpp \
     CTreeWidgetItem.cpp \
-    CTreeWidget.cpp \
-    DomParser.cpp
+    CTreeWidget.cpp
 
 HEADERS  += mainwindow.h \
     CFirstAreaTable.h \
     CTreeWidgetItem.h \
-    CTreeWidget.h \
-    DomParser.h
+    CTreeWidget.h
 
 FORMS    += mainwindow.ui
 CONFIG += staticlib

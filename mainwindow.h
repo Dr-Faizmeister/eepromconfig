@@ -10,7 +10,6 @@
 #include "ui_mainwindow.h"
 #include "CTreeWidgetItem.h"
 #include "CTreeWidget.h"
-#include "DomParser.h"
 
 struct rec {
     quint32 addr;
