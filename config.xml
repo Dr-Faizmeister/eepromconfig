@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <TLV>
-  <type term="PortInfo">
-    <type term="PortUser">
+  <type name="PortInfo">
+    <type name="PortUser">
       <value>variable</value>
     </type>
-    <type term="PortSwitch">
+    <type name="PortSwitch">
       <value>variable</value>
     </type>
-    <type term="SMI">
+    <type name="SMI">
       <value>variable</value>
     </type>
-    <type term="AddrPHY">
+    <type name="AddrPHY">
       <value>variable</value>
     </type>
-    <type term="AddrSwitch">
+    <type name="AddrSwitch">
       <value>variable</value>
     </type>
-    <type term="PortSpeed">
+    <type name="PortSpeed">
       <value>Fast Fiber</value>
       <value>Fast Copper</value>
       <value>Gig Fiber</value>
@@ -24,79 +24,79 @@
       <value>10Gig Fiber</value>
       <value>10Gig Copper</value>
     </type>
-    <type term="PortCombo">
+    <type name="PortCombo">
       <value>Combo</value>
       <value>Non Combo</value>
     </type>
-    <type term="OpticTransiever">
+    <type name="OpticTransiever">
       <value>None</value>
       <value>SFP</value>
       <value>SFP+</value>
       <value>SFF</value>
     </type>
-    <type term="TypePHY">
+    <type name="TypePHY">
       <value>88E3083</value>
       <value>88E1322</value>
       <value>88E1340</value>
       <value>98X20251</value>
     </type>
-    <type term="PortPOE">
+    <type name="PortPOE">
       <value>NonPOE</value>
       <value>POE</value>
       <value>POE+</value>
     </type>
-    <type term="PortStack">
+    <type name="PortStack">
       <value>Non Stack</value>
       <value>Primary</value>
       <value>Secondary</value>
     </type>
-    <type term="SwitchCascade">
+    <type name="SwitchCascade">
       <value>variable</value>
     </type>
-    <type term="InterruptPin">
+    <type name="InterruptPin">
       <value>variable</value>
     </type>
-    <type term="TypeI2C">
+    <type name="TypeI2C">
       <value>variable</value>
     </type>
-    <type term="I2CAddrStream">
+    <type name="I2CAddrStream">
       <value>variable</value>
     </type>
   </type>
-  <type term="ChipSwitch">
+  <type name="ChipSwitch">
     <value>98DX2122</value>
     <value>98DX4122</value>
   </type>
-  <type term="POEInfo">
-    <type term="POEBudget">
+  <type name="POEInfo">
+    <type name="POEBudget">
       <value>variable</value>
     </type>
-    <type term="POEChip">
+    <type name="POEChip">
       <value>PD69100 (Microsemi)</value>
       <value>Si3482 (Silabs)</value>
     </type>
-    <type term="ChipInterface">
+    <type name="ChipInterface">
       <value>UART</value>
       <value>I2C</value>
       <value>SPI</value>
     </type>
-    <type term="ChipPOEAddrI2C">
+    <type name="ChipPOEAddrI2C">
       <value>variable</value>
     </type>
   </type>
-  <type term="DyingGasp">
+  <type name="DyingGasp">
     <value>variable</value>
   </type>
-  <type term="MacAddr">
+  <type name="MacAddr">
     <value>variable</value>
   </type>
-  <type term="SerialNumber">
+  <type name="SerialNumber">
     <value>variable</value>
   </type>
-  <type term="Name">
+  <type name="Name">
     <value>variable</value>
   </type>
-  <type term="SoftwareSet">
+  <type name="SoftwareSet">
     <value>variable</value>
   </type>
 </TLV>

@@ -144,18 +144,16 @@ QWidget* CTreeWidgetItem::createValueEditor()
         return false;
     }
     QDomElement root = config.documentElement();
-    if (root.tagName() != "TLV") {
-        return false;
-    }
+
     QDomNode child = root.firstChild();
     while (!child.isNull()) {
         QDomElement el = child.toElement();
         if (el.tagName() == "type") {
-            if (el.attribute("term") == "PortInfo") {
+            if (el.attribute("name") == "PortInfo") {
                 QDomNode child = el.firstChild();
                 while (!child.isNull()) {
                     QDomElement element = child.toElement();
-                    if (element.tagName() == "type" && element.attribute("term") == "PortSpeed") {
+                    if (element.tagName() == "type" && element.attribute("name") == "PortSpeed") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -163,7 +161,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
                             }
                             child = child.nextSibling();
                         }
-                    } else if (element.tagName() == "type" && element.attribute("term") == "PortCombo") {
+                    } else if (element.tagName() == "type" && element.attribute("name") == "PortCombo") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -171,7 +169,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
                             }
                             child = child.nextSibling();
                         }
-                    } else if (element.tagName() == "type" && element.attribute("term") == "OpticTransiever") {
+                    } else if (element.tagName() == "type" && element.attribute("name") == "OpticTransiever") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -179,7 +177,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
                             }
                             child = child.nextSibling();
                         }
-                    } else if (element.tagName() == "type" && element.attribute("term") == "TypePHY") {
+                    } else if (element.tagName() == "type" && element.attribute("name") == "TypePHY") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -187,7 +185,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
                             }
                             child = child.nextSibling();
                         }
-                    } else if (element.tagName() == "type" && element.attribute("term") == "PortPOE") {
+                    } else if (element.tagName() == "type" && element.attribute("name") == "PortPOE") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -195,7 +193,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
                             }
                             child = child.nextSibling();
                         }
-                    } else if (element.tagName() == "type" && element.attribute("term") == "PortStack") {
+                    } else if (element.tagName() == "type" && element.attribute("name") == "PortStack") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -206,11 +204,11 @@ QWidget* CTreeWidgetItem::createValueEditor()
                     }
                     child = child.nextSibling();
                 }
-            } else if (el.attribute("term") == "POEInfo") {
+            } else if (el.attribute("name") == "POEInfo") {
                 QDomNode child = el.firstChild();
                 while (!child.isNull()) {
                     QDomElement element = child.toElement();
-                    if (element.tagName() == "type" && element.attribute("term") == "POEChip") {
+                    if (element.tagName() == "type" && element.attribute("name") == "POEChip") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -218,7 +216,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
                             }
                             child = child.nextSibling();
                         }
-                    } else if (element.tagName() == "type" && element.attribute("term") == "ChipInterface") {
+                    } else if (element.tagName() == "type" && element.attribute("name") == "ChipInterface") {
                         QDomNode child = element.firstChild();
                         while (!child.isNull()) {
                             if (child.toElement().tagName() == "value") {
@@ -229,7 +227,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
                     }
                     child = child.nextSibling();
                 }
-            } else if (el.attribute("term") == "ChipSwitch") {
+            } else if (el.attribute("name") == "ChipSwitch") {
                 QDomNode child = el.firstChild();
                 while (!child.isNull()) {
                     if (child.toElement().tagName() == "value") {
@@ -241,7 +239,7 @@ QWidget* CTreeWidgetItem::createValueEditor()
         }
         child = child.nextSibling();
     }
-    file.close(); // нужно ли вообще его закрывать??
+    file.close();
 
     if (cparent)
     {

@@ -13,44 +13,42 @@ QWidget* CTreeItemDelegate::createEditor ( QWidget * parent,
     QStringList PortInfo;
     QStringList POEInfo;
 
-    QFile file("C:/Qt/proj/eeprom/eepromconf/config.xml");
+    QFile file("C:/Qt/proj/eeprom/eepromconf/config.xml");   // файл с конфигурацией
     file.open(QFile::ReadOnly | QFile::Text);
     QDomDocument config;
     if (!config.setContent(&file, false)) {
         return false;
     }
-    QDomElement root = config.documentElement();
-    if (root.tagName() != "TLV") {
-        return false;
-    }
-    QDomNode child = root.firstChild();
+    QDomElement root = config.documentElement();            // корневой элемент в XML
+
+    QDomNode child = root.firstChild();                     // переход к дочернему узлу
     while (!child.isNull()) {
-        QDomElement el = child.toElement();
+        QDomElement el = child.toElement();                 // узел -> элемент
         if (el.tagName() == "type") {
-            TLVFirstLevel << el.attribute("term");
-            if (el.attribute("term") == "PortInfo") {
-                QDomNode child = el.firstChild();
+            TLVFirstLevel << el.attribute("name");          // заполнение списка с перечисленными в конфигурационном файле типами
+            if (el.attribute("name") == "PortInfo") {
+                QDomNode child = el.firstChild();           // переход к дочернему узлу типа Port Info
                 while (!child.isNull()) {
                     QDomElement el = child.toElement();
                     if (el.tagName() == "type") {
-                        PortInfo << el.attribute("term");
+                        PortInfo << el.attribute("name");   // заполнение списка Port Info дочерними типами
                     }
-                    child = child.nextSibling();
+                    child = child.nextSibling();            // переход к следующему элементу соответствующего уровня (Port Info)
                 }
-            } else if (el.attribute("term") == "POEInfo") {
+            } else if (el.attribute("name") == "POEInfo") {
                 QDomNode child = el.firstChild();
                 while (!child.isNull()) {
                     QDomElement el = child.toElement();
                     if (el.tagName() == "type") {
-                        POEInfo << el.attribute("term");
+                        POEInfo << el.attribute("name");
                     }
                     child = child.nextSibling();
                 }
             }
         }
-        child = child.nextSibling();
+        child = child.nextSibling();              // переход к следующему элементу соответствующего уровня (типы верхнего уровня)
     }
-    file.close(); // нужно ли вообще его закрывать??
+    file.close();
 
     CTreeWidget* treeWidget = dynamic_cast<CTreeWidget*> (this->parent());
     CTreeWidgetItem* treeWidgetItem = treeWidget->currentItem();
